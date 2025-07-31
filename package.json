@@ -2,7 +2,7 @@
   "name": "todotxt-language",
   "displayName": "Todo.txt Syntax & Task Management",
   "description": "Syntax highlighting and formatting for todo.txt files",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "publisher": "bootta11",
   "license": "MIT",
   "repository": {
@@ -13,6 +13,24 @@
     "url": "https://github.com/Bootta11/todotxt-language/issues"
   },
   "homepage": "https://github.com/Bootta11/todotxt-language#readme",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "publish-ovsx": "npx dotenv -- cross-var ovsx publish -p %OVSX_TOKEN%",
+    "publish-vsix": "dotenv -- cross-var vsce publish -p %VSCE_TOKEN%",
+    "publish": "npm run publish-ovsx && npm run publish-vsix"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "cross-var": "^1.1.0",
+    "dotenv": "^17.2.1",
+    "dotenv-cli": "^10.0.0"
+  },
   "keywords": [
     "todo",
     "todotxt",
@@ -122,7 +140,7 @@
         },
         "todotxt.autoSave": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Automatically save file after toggling task completion"
         }
       }
@@ -131,23 +149,5 @@
   "activationEvents": [
     "onLanguage:todotxt"
   ],
-  "main": "./out/extension.js",
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "publish-ovsx": "npx dotenv -- cross-var ovsx publish -p %OVSX_TOKEN%",
-    "publish-vsix": "dotenv -- cross-var vsce publish -p %VSCE_TOKEN%",
-    "publish": "npm run publish-ovsx && npm run publish-vsix"
-  },
-  "devDependencies": {
-    "@types/node": "16.x",
-    "@types/vscode": "^1.74.0",
-    "typescript": "^4.9.4"
-  },
-  "dependencies": {
-    "cross-var": "^1.1.0",
-    "dotenv": "^17.2.1",
-    "dotenv-cli": "^10.0.0"
-  }
+  "main": "./out/extension.js"
 }

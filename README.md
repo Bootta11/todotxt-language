@@ -149,7 +149,7 @@ The extension is fully configurable through VS Code settings. Access via:
   "todotxt.moveCompletedKey": "alt+shift+d",
   "todotxt.moveCompletedKeyMac": "cmd+shift+d",
   "todotxt.doneFileName": "done.txt",
-  "todotxt.autoSave": true
+  "todotxt.autoSave": false
 }
 ```
 
@@ -160,7 +160,7 @@ The extension is fully configurable through VS Code settings. Access via:
 - **moveCompletedKey**: Archive shortcut for Windows/Linux (default: `alt+shift+d`)
 - **moveCompletedKeyMac**: Archive shortcut for Mac (default: `cmd+shift+d`)
 - **doneFileName**: Name of archive file (default: `done.txt`)
-- **autoSave**: Automatically save after toggling completion (default: `true`)
+- **autoSave**: Automatically save after toggling completion (default: `false`)
 
 ### Custom Key Bindings
 

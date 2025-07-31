@@ -5,35 +5,6 @@ import * as path from "path";
 export function activate(context: vscode.ExtensionContext) {
   console.log("Todo.txt extension is now active!");
 
-  // Apply custom CSS for strikethrough (if needed)
-  const applyCustomStyles = () => {
-    const config = vscode.workspace.getConfiguration("workbench");
-    const currentCustomizations =
-      (config.get("colorCustomizations") as any) || {};
-
-    // Ensure strikethrough works by adding editor token color customizations
-    const todoTxtCustomizations = {
-      ...currentCustomizations,
-      "editor.tokenColorCustomizations": {
-        ...currentCustomizations["editor.tokenColorCustomizations"],
-        textMateRules: [
-          ...(currentCustomizations["editor.tokenColorCustomizations"]
-            ?.textMateRules || []),
-          {
-            scope: [
-              "markup.strikethrough.todotxt",
-              "entity.name.function.completed.todotxt",
-            ],
-            settings: {
-              foreground: "#22c55e",
-              fontStyle: "strikethrough",
-            },
-          },
-        ],
-      },
-    };
-  };
-
   // Register completion provider for todo.txt files
   const completionProvider = vscode.languages.registerCompletionItemProvider(
     "todotxt",
@@ -85,7 +56,7 @@ export function activate(context: vscode.ExtensionContext) {
   // Register command to toggle task completion
   const toggleCompletion = vscode.commands.registerCommand(
     "todotxt.toggleCompletion",
-    async () => {
+    () => {
       const editor = vscode.window.activeTextEditor;
       if (!editor) return;
 
@@ -105,16 +76,19 @@ export function activate(context: vscode.ExtensionContext) {
         newText = `x ${today} ${lineText}`;
       }
 
-      await editor.edit((editBuilder) => {
-        editBuilder.replace(line.range, newText);
-      });
-
-      // Auto-save if enabled
-      const config = vscode.workspace.getConfiguration("todotxt");
-      const autoSave = config.get<boolean>("autoSave", true);
-      if (autoSave) {
-        await document.save();
-      }
+      // Apply edit immediately (synchronous)
+      editor
+        .edit((editBuilder) => {
+          editBuilder.replace(line.range, newText);
+        })
+        .then(() => {
+          // Auto-save in background (don't wait for it)
+          const config = vscode.workspace.getConfiguration("todotxt");
+          const autoSave = config.get<boolean>("autoSave", true);
+          if (autoSave) {
+            document.save(); // Don't await this
+          }
+        });
     }
   );
 
