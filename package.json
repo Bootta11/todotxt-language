@@ -1,0 +1,145 @@
+{
+  "name": "todotxt-language",
+  "displayName": "Todo.txt Language Support",
+  "description": "Syntax highlighting and formatting for todo.txt files",
+  "version": "1.0.0",
+  "publisher": "your-publisher-name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bootta11/todotxt-language"
+  },
+  "bugs": {
+    "url": "https://github.com/Bootta11/todotxt-language/issues"
+  },
+  "homepage": "https://github.com/Bootta11/todotxt-language#readme",
+  "keywords": [
+    "todo",
+    "todotxt",
+    "todo.txt",
+    "productivity",
+    "task management",
+    "syntax highlighting"
+  ],
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "todotxt",
+        "aliases": [
+          "Todo.txt",
+          "todotxt"
+        ],
+        "extensions": [
+          ".todo.txt",
+          ".todotxt"
+        ],
+        "filenames": [
+          "todo.txt",
+          "TODO.txt",
+          "Todo.txt"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "todotxt",
+        "scopeName": "text.todotxt",
+        "path": "./syntaxes/todotxt.tmLanguage.json"
+      }
+    ],
+    "themes": [
+      {
+        "label": "Todo.txt Theme",
+        "uiTheme": "vs-dark",
+        "path": "./themes/todotxt-theme.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "todotxt.toggleCompletion",
+        "title": "Toggle Task Completion",
+        "category": "Todo.txt"
+      },
+      {
+        "command": "todotxt.addPriority",
+        "title": "Add Priority",
+        "category": "Todo.txt"
+      },
+      {
+        "command": "todotxt.moveCompletedToDone",
+        "title": "Move Completed Tasks to done.txt",
+        "category": "Todo.txt"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "todotxt.toggleCompletion",
+        "key": "alt+shift+t",
+        "mac": "cmd+shift+t",
+        "when": "editorTextFocus && resourceExtname == '.todo.txt' || editorTextFocus && resourceExtname == '.todotxt' || editorTextFocus && resourceFilename == 'todo.txt'"
+      },
+      {
+        "command": "todotxt.moveCompletedToDone",
+        "key": "alt+shift+d",
+        "mac": "cmd+shift+d",
+        "when": "editorTextFocus && resourceExtname == '.todo.txt' || editorTextFocus && resourceExtname == '.todotxt' || editorTextFocus && resourceFilename == 'todo.txt'"
+      }
+    ],
+    "configuration": {
+      "title": "Todo.txt",
+      "properties": {
+        "todotxt.toggleCompletionKey": {
+          "type": "string",
+          "default": "alt+shift+t",
+          "description": "Key binding for toggling task completion (Windows/Linux). Use format like 'ctrl+d' or 'alt+shift+t'"
+        },
+        "todotxt.toggleCompletionKeyMac": {
+          "type": "string",
+          "default": "cmd+shift+t",
+          "description": "Key binding for toggling task completion (Mac). Use format like 'cmd+d' or 'cmd+shift+t'"
+        },
+        "todotxt.moveCompletedKey": {
+          "type": "string",
+          "default": "alt+shift+d",
+          "description": "Key binding for moving completed tasks to done.txt (Windows/Linux)"
+        },
+        "todotxt.moveCompletedKeyMac": {
+          "type": "string",
+          "default": "cmd+shift+d",
+          "description": "Key binding for moving completed tasks to done.txt (Mac)"
+        },
+        "todotxt.doneFileName": {
+          "type": "string",
+          "default": "done.txt",
+          "description": "Name of the file to move completed tasks to"
+        },
+        "todotxt.autoSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically save file after toggling task completion"
+        }
+      }
+    }
+  },
+  "activationEvents": [
+    "onLanguage:todotxt"
+  ],
+  "main": "./out/extension.js",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.4"
+  }
+}

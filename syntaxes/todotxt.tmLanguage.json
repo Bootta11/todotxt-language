@@ -1,0 +1,79 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Todo.txt",
+  "scopeName": "text.todotxt",
+  "patterns": [
+    {
+      "include": "#completed-task"
+    },
+    {
+      "include": "#priority"
+    },
+    {
+      "include": "#date"
+    },
+    {
+      "include": "#project"
+    },
+    {
+      "include": "#context"
+    },
+    {
+      "include": "#key-value"
+    },
+    {
+      "include": "#comment"
+    }
+  ],
+  "repository": {
+    "completed-task": {
+      "name": "markup.strikethrough.todotxt entity.name.function.completed.todotxt",
+      "match": "^x\\s+.*$",
+      "captures": {
+        "0": {
+          "name": "entity.name.function.completed.todotxt"
+        }
+      }
+    },
+    "priority": {
+      "name": "keyword.control.priority.todotxt",
+      "match": "\\(([A-Z])\\)",
+      "captures": {
+        "0": {
+          "name": "keyword.control.priority.todotxt"
+        },
+        "1": {
+          "name": "constant.character.priority.todotxt"
+        }
+      }
+    },
+    "date": {
+      "name": "constant.numeric.date.todotxt",
+      "match": "\\b\\d{4}-\\d{2}-\\d{2}\\b"
+    },
+    "project": {
+      "name": "entity.name.tag.project.todotxt",
+      "match": "\\+\\w+"
+    },
+    "context": {
+      "name": "variable.parameter.context.todotxt",
+      "match": "@\\w+"
+    },
+    "key-value": {
+      "name": "meta.key-value.todotxt",
+      "match": "\\b(\\w+):(\\S+)\\b",
+      "captures": {
+        "1": {
+          "name": "entity.other.attribute-name.todotxt"
+        },
+        "2": {
+          "name": "string.unquoted.todotxt"
+        }
+      }
+    },
+    "comment": {
+      "name": "comment.line.number-sign.todotxt",
+      "match": "#.*$"
+    }
+  }
+}

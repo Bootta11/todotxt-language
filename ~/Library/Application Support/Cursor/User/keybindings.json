@@ -1,0 +1,87 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "ctrl+numpad_add",
+    "command": "workbench.action.navigateForward",
+    "when": "canNavigateForward"
+  },
+  {
+    "key": "ctrl+numpad_subtract",
+    "command": "workbench.action.navigateBack",
+    "when": "canNavigateBack"
+  },
+  {
+    "key": "ctrl+shift+n",
+    "command": "explorer.newFile"
+  },
+  {
+    "key": "capslock",
+    "command": "cody.command.edit-code",
+    "when": "cody.activated && !editorReadonly"
+  },
+  {
+    "key": "alt+k",
+    "command": "-cody.command.edit-code",
+    "when": "cody.activated && !editorReadonly"
+  },
+  {
+    "key": "ctrl+cmd+k",
+    "command": "cody.menu.commands",
+    "when": "cody.activated"
+  },
+  {
+    "key": "alt+c",
+    "command": "-cody.menu.commands",
+    "when": "cody.activated"
+  },
+  {
+    "key": "shift+tab",
+    "command": "outdent",
+    "when": "editorFocus && !editorTabMovesFocus"
+  },
+  {
+    "key": "shift+cmd+m",
+    "command": "-workbench.actions.view.problems",
+    "when": "workbench.panel.markers.view.active"
+  },
+  {
+    "key": "ctrl+shift+m",
+    "command": "explorer.newFolder"
+  },
+  {
+    "key": "shift+cmd+m",
+    "command": "editor.action.toggleTabFocusMode"
+  },
+  {
+    "key": "ctrl+shift+m",
+    "command": "-editor.action.toggleTabFocusMode"
+  },
+  // Override the problematic Tab configuration
+  {
+    "key": "tab",
+    "command": "-tab",
+    "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
+  },
+  // Proper Tab key configuration with higher priority
+  {
+    "key": "tab",
+    "command": "acceptSelectedSuggestion",
+    "when": "suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "tab",
+    "command": "editor.action.inlineSuggest.commit",
+    "when": "inlineSuggestionVisible && !suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "tab",
+    "command": "tab",
+    "when": "!suggestWidgetVisible && !inlineSuggestionVisible && textInputFocus && !editorTabMovesFocus"
+  },
+  // Terminal tab completion
+  {
+    "key": "tab",
+    "command": "workbench.action.terminal.acceptSelectedSuggestion",
+    "when": "terminalFocus && terminalSuggestWidgetVisible"
+  }
+]
