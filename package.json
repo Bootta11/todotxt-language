@@ -2,7 +2,7 @@
   "name": "todotxt-language",
   "displayName": "Todo.txt Language Support",
   "description": "Syntax highlighting and formatting for todo.txt files",
-  "version": "1.1.0",
+  "version": "1.0.1",
   "publisher": "bootta11",
   "license": "MIT",
   "repository": {
@@ -136,7 +136,9 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "publish": "npx dotenv -- cross-var ovsx publish -p %OVSX_TOKEN%"
+    "publish-ovsx": "npx dotenv -- cross-var ovsx publish -p %OVSX_TOKEN%",
+    "publish-vsix": "dotenv -- cross-var vsce publish -p %VSCE_TOKEN%",
+    "publish": "npm run publish-ovsx && npm run publish-vsix"
   },
   "devDependencies": {
     "@types/node": "16.x",
