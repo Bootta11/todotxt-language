@@ -85,6 +85,12 @@ x 2024-01-15 Call Mom
 x 2024-01-14 Buy groceries
 ```
 
+**Note**: If strikethrough doesn't appear immediately:
+
+1. Try reloading VS Code window (`Ctrl+Shift+P` → "Developer: Reload Window")
+2. Ensure you're using a compatible theme
+3. Check that the file is recognized as todo.txt language (bottom-right corner of VS Code)
+
 ### Priority Tasks (Red + Bold)
 
 ```
@@ -186,6 +192,27 @@ The extension automatically activates for:
 
 - `.todo.txt` files
 - `.todotxt` files
+
+## Troubleshooting
+
+### Strikethrough not showing?
+
+1. **Reload window**: `Ctrl+Shift+P` → "Developer: Reload Window"
+2. **Check language mode**: Bottom-right corner should show "Todo.txt"
+3. **Theme compatibility**: Some themes may override strikethrough styling
+4. **Manual activation**: `Ctrl+Shift+P` → "Change Language Mode" → "Todo.txt"
+
+### Shortcuts not working?
+
+1. **Check conflicts**: Go to `File > Preferences > Keyboard Shortcuts` and search for conflicts
+2. **Customize bindings**: Override in settings or keybindings.json
+3. **File context**: Shortcuts only work in todo.txt files
+
+### Extension not activating?
+
+1. **File extension**: Ensure file ends with `.todo.txt`, `.todotxt`, or is named `todo.txt`
+2. **Reload extension**: `Ctrl+Shift+P` → "Developer: Reload Window"
+3. **Check installation**: Extensions panel should show "Todo.txt Language Support" as enabled
 
 ## Development
 

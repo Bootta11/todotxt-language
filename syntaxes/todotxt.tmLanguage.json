@@ -27,11 +27,11 @@
   ],
   "repository": {
     "completed-task": {
-      "name": "markup.strikethrough.todotxt entity.name.function.completed.todotxt",
-      "match": "^x\\s+.*$",
+      "name": "markup.strikethrough.todotxt",
+      "match": "^(x\\s+.*)$",
       "captures": {
-        "0": {
-          "name": "entity.name.function.completed.todotxt"
+        "1": {
+          "name": "entity.name.function.completed.todotxt markup.strikethrough.todotxt"
         }
       }
     },

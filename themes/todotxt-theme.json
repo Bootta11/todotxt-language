@@ -4,16 +4,18 @@
   "colors": {},
   "tokenColors": [
     {
-      "scope": "entity.name.function.completed.todotxt",
+      "scope": [
+        "markup.strikethrough.todotxt",
+        "entity.name.function.completed.todotxt"
+      ],
       "settings": {
         "foreground": "#22c55e",
         "fontStyle": "strikethrough"
       }
     },
     {
-      "scope": "markup.strikethrough.todotxt",
+      "scope": "markup.strikethrough",
       "settings": {
-        "foreground": "#22c55e",
         "fontStyle": "strikethrough"
       }
     },
