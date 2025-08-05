@@ -2,7 +2,7 @@
   "name": "todotxt-language",
   "displayName": "Todo.txt Syntax & Task Management",
   "description": "Syntax highlighting and formatting for todo.txt files",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "publisher": "bootta11",
   "license": "MIT",
   "repository": {

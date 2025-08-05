@@ -34,22 +34,34 @@ jobs:
             echo "TOKENS_AVAILABLE=true" >> $GITHUB_ENV
           fi
 
-      - name: Check for version tag
+      - name: Check for version change
         run: |
-          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          # Get current version from package.json
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "Current version: $CURRENT_VERSION"
 
-          if [ -z "$LATEST_TAG" ]; then
-            echo "No version tags found, skipping publish"
-            echo "VERSION_TAG_FOUND=false" >> $GITHUB_ENV
+          # Check if this is the first commit or if package.json changed
+          if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            # Not the first commit, check if version changed
+            PREVIOUS_VERSION=$(git show HEAD~1:package.json | node -p "JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf8')).version" 2>/dev/null || echo "")
+            
+            if [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ] && [ -n "$PREVIOUS_VERSION" ]; then
+              echo "✅ Version changed: $PREVIOUS_VERSION → $CURRENT_VERSION"
+              echo "VERSION_CHANGED=true" >> $GITHUB_ENV
+            else
+              echo "❌ Version unchanged: $CURRENT_VERSION"
+              echo "VERSION_CHANGED=false" >> $GITHUB_ENV
+            fi
           else
-            echo "Latest version tag: $LATEST_TAG"
-            echo "VERSION_TAG_FOUND=true" >> $GITHUB_ENV
+            # First commit, always publish
+            echo "✅ First commit detected, will publish version: $CURRENT_VERSION"
+            echo "VERSION_CHANGED=true" >> $GITHUB_ENV
           fi
 
       - name: Set publish decision
         id: publish-decision
         run: |
-          if [ "$TOKENS_AVAILABLE" = "true" ] && [ "$VERSION_TAG_FOUND" = "true" ]; then
+          if [ "$TOKENS_AVAILABLE" = "true" ] && [ "$VERSION_CHANGED" = "true" ]; then
             echo "✅ All checks passed - will publish"
             echo "should_publish=true" >> $GITHUB_OUTPUT
           else
@@ -66,7 +78,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Add this to fetch tags in build job too
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
