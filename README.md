@@ -224,6 +224,45 @@ To modify the extension:
 4. Run `npm run compile` to rebuild
 5. Press `F5` to test changes
 
+## Continuous Integration & Deployment
+
+This project uses GitHub Actions to automatically build and publish the extension on new commits to the main branch.
+
+### Setup Required Secrets
+
+To enable automatic publishing, you need to add the following secrets to your GitHub repository:
+
+1. **Go to your repository settings**: `Settings` → `Secrets and variables` → `Actions`
+2. **Add the following repository secrets**:
+
+   - `OVSX_TOKEN`: Your OpenVSX registry personal access token
+
+     - Get it from: https://open-vsx.org/user-settings/tokens
+     - This publishes to the OpenVSX registry (used by VSCodium and other VS Code alternatives)
+
+   - `VSCE_TOKEN`: Your Visual Studio Code Marketplace personal access token
+     - Get it from: https://dev.azure.com/ → Personal Access Tokens
+     - This publishes to the official VS Code Marketplace
+
+### How it works
+
+- **On main branch commits**: The extension is automatically published to both marketplaces
+
+### Manual Publishing
+
+If you prefer to publish manually, you can use the npm scripts:
+
+```bash
+# Publish to OpenVSX Registry
+npm run publish-ovsx
+
+# Publish to VS Code Marketplace
+npm run publish-vsix
+
+# Publish to both
+npm run publish
+```
+
 ## Contributing
 
 We welcome contributions! Here's how you can help:
