@@ -10,10 +10,14 @@ jobs:
   checks:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    outputs:
+      should_publish: ${{ steps.publish-decision.outputs.should_publish }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Check for publish tokens
         run: |
@@ -61,6 +65,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Add this to fetch tags in build job too
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
