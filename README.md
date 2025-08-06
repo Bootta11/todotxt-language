@@ -246,7 +246,7 @@ To enable automatic publishing, you need to add the following secrets to your Gi
 
 ### How it works
 
-- **On main branch commits**: The extension is automatically published to both marketplaces
+- **On main branch commits**: The extension is automatically published to both marketplaces(it requires that version inside package.json is updated)
 
 ### Manual Publishing
 
